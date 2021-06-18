@@ -4,8 +4,10 @@
     height: 120px;
     padding: 0;
     border-radius: 50%;
-    border: 0;
     border-style: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .profile__avatar-edit:hover {
@@ -20,7 +22,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: #000;
     opacity: 0;
     position: absolute;
