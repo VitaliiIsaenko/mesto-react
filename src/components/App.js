@@ -11,7 +11,11 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
-    const [popupsClosed, setPopupsClosed] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -29,6 +33,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -39,6 +44,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
       </div>
@@ -56,8 +62,8 @@ function App() {
           id="profile-name-input"
           type="text"
           placeholder="Введите имя"
-          minlength="2"
-          maxlength="40"
+          minLength="2"
+          maxLength="40"
           required
         />
         <span className="form__input-error profile-name-input-error"></span>
@@ -102,8 +108,8 @@ function App() {
           id="card-name-input"
           type="text"
           placeholder="Название"
-          minlength="2"
-          maxlength="30"
+          minLength="2"
+          maxLength="30"
           required
         />
         <span className="form__input-error card-name-input-error"></span>
@@ -118,7 +124,7 @@ function App() {
         <span className="form__input-error link-input-error"></span>
       </PopupWithForm>
 
-      <ImagePopup />
+      <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
 
       <PopupWithForm
         name="approve"

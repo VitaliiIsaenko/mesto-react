@@ -1,6 +1,10 @@
 .pictures__item-photo {
     width: 282px;
     height: 282px;
-    object-fit: cover;
     cursor: pointer;
+    border-style: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
 }
