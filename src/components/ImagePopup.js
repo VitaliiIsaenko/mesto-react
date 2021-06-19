@@ -14,10 +14,10 @@ function ImagePopup(props) {
         <figure className="popup__figure">
           <img
             className="popup__image"
-            src={props.selectedCard != null ? props.selectedCard.link : "#"}
-            alt={props.selectedCard != null ? props.selectedCard.name : "#"}
+            src={props.selectedCard?.link}
+            alt={props.selectedCard?.name}
           />
-          <figcaption className="popup__image-caption"></figcaption>
+          <figcaption className="popup__image-caption">{props.selectedCard?.name}</figcaption>
         </figure>
       </div>
     </div>
