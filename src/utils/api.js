@@ -77,6 +77,14 @@ class Api {
             .then(this._checkResponse);
     }
 
+    changeLikeCardStatus(id, isLiked) {
+        if (isLiked) {
+            return this.likeCard(id);
+        } else {
+            return this.dislikeCard(id);
+        }
+    }
+
     _checkResponse(result) {
         if (result.ok) {
             return result.json();
