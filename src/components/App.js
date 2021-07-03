@@ -32,7 +32,6 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -55,7 +54,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    //todo: rewrite to async await?
     api
       .getUserInfo()
       .then((data) => {
@@ -85,13 +83,6 @@ function App() {
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-  }
-
-  function closeAllPopups() {
-    setIsAddPlacePopupOpen(false);
-    setIsEditProfilePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setSelectedCard(null);
   }
 
   function handleUpdateUser(name, about) {
@@ -132,6 +123,13 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(err));
+  }
+
+  function closeAllPopups() {
+    setIsAddPlacePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (

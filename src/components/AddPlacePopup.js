@@ -1,23 +1,22 @@
 import PopupWithForm from "./PopupWithForm";
-import React from 'react';
+import React from "react";
 
 export default function AddPlacePopup(props) {
-const [name, setName] = React.useState('');
-const [pictureLink, setPictureLink] = React.useState('');
+  const [name, setName] = React.useState("");
+  const [pictureLink, setPictureLink] = React.useState("");
 
+  function handleAddPlaceSubmit(e) {
+    e.preventDefault();
 
-function handleAddPlaceSubmit(e) {
-  e.preventDefault();
+    props.onAddPlace(name, pictureLink);
+  }
 
-  props.onAddPlace(name, pictureLink);
-}
-
-function handleNameChange(e) {
-  setName(e.target.value);
-}
-function handlePictureLinkChange(e) {
-  setPictureLink(e.target.value);
-}
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+  function handlePictureLinkChange(e) {
+    setPictureLink(e.target.value);
+  }
 
   return (
     <PopupWithForm
