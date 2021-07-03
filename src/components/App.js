@@ -4,6 +4,9 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import api from "../utils/api";
+
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -12,6 +15,18 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState(null);
+
+  React.useEffect(() => {
+    //todo: rewrite to async await?
+    api.getUserInfo().then((data) => {
+      setCurrentUser({ name: data.name, about: data.about, avatar: data.avatar, _id: data._id });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
+  
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -37,6 +52,7 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="underlay">
       <div className="page">
         <Header />
@@ -133,6 +149,7 @@ function App() {
         onClose={closeAllPopups}
       ></PopupWithForm>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
