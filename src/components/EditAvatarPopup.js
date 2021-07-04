@@ -10,6 +10,10 @@ export default function EditAvatarPopup(props) {
     props.onUpdateAvatar(avatarRef.current.value);
   }
 
+  React.useEffect(() => {
+    avatarRef.current.value = '';
+  }, [props.isOpen]);
+
   return (
     <PopupWithForm
       name="edit-avatar"
