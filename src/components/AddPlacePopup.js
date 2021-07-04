@@ -14,9 +14,15 @@ export default function AddPlacePopup(props) {
   function handleNameChange(e) {
     setName(e.target.value);
   }
+
   function handlePictureLinkChange(e) {
     setPictureLink(e.target.value);
   }
+
+  React.useEffect(() => {
+    setName('');
+    setPictureLink('');
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm

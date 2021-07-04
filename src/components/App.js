@@ -20,14 +20,17 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState(null);
   const [cards, setCards] = React.useState([]);
   React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([userData,cardsData]) => {
+      setCurrentUser({
+        name: userData.name,
+        about: userData.about,
+        avatar: userData.avatar,
+        _id: userData._id,
       });
+      setCards(cardsData);
+    })
+    .catch((err) => console.log(err));
   }, []);
 
   function handleCardLike(card) {
@@ -52,22 +55,6 @@ function App() {
       )
       .catch((err) => console.log(err));
   }
-
-  React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser({
-          name: data.name,
-          about: data.about,
-          avatar: data.avatar,
-          _id: data._id,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   function handleCardClick(card) {
     setSelectedCard(card);
